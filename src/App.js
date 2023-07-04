@@ -4,8 +4,9 @@ import "./App.css";
 import { Auth } from "./components/Auth";
 import { Chat } from "./components/Chat.js";
 import { signOut } from "firebase/auth";
-
 import Cookies from "universal-cookie";
+import { auth } from './firebase-config';
+
 const cookies = new Cookies();
 
 function App() {
@@ -15,8 +16,8 @@ function App() {
   const roomInputRef = useRef(null);
 
   const signUserOut = async () => {
-    await signOut();
-    cookies.remove("auth-toke");
+    await signOut(auth);
+    cookies.remove("auth-token");
     setIsAuth(false);
     setRoom(null);
   }
